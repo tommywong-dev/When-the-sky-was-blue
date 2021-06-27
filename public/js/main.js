@@ -249,66 +249,32 @@ AFRAME.registerComponent("foo", {
 // Shadow code below, server-side
 
 /*Socket IO side */
-var socket = io.connect();
+var socket = io();
 
-var numUsers = 0;
-var previousNumUsers = 0;
+var shadowNum = 0;
 
-var requestAnimationFrame =
-  window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
-  window.msRequestAnimationFrame;
+socket.emit("userConnected");
+socket.on("userCount", data => {
+  console.log('client count:', data);
+  if (!shadowNum) {
+    for (let i = 0; i < data; i++) appendShadow(i);
+  } else {
+    appendShadow(data);
+  }
+})
 
-var time = 0;
-var fps = 60; //frames per second to determine how many frames I want per second
-
-const socket_loop = () => {
-  //use set timeout function to slowdown animation frame.
-  setTimeout(function () {
-    requestAnimationFrame(socket_loop);
-    socket.on("clientreceiveusersconnected", data => {
-      // console.log("Num of users connected ", numUsers);
-      numUsers = data;
-    });
-    if (numUsers > 0 && previousNumUsers < numUsers) {
-      for (var i = 0; i < numUsers; i++) {
-        appendObject(i);
-      }
-    } else if (numUsers < previousNumUsers) {
-      removeObject(previousNumUsers);
-    }
-    socket.emit("usersConnected");
-    previousNumUsers = numUsers;
-    // the following line is commented out to clean up the console log as it is throwing a "data not defined" error
-    // numUsers = data;
-  }, 1000 / fps);
-};
-
-socket_loop();
-
-// position of the camera in the beginning  0 1 4
-// https://stackoverflow.com/questions/5300938/calculating-the-position-of-points-in-a-circle
-
-
-var radius = 20;
-var center_x = 0;
-var center_z = 4;
-
-function appendObject(id) {
+function appendShadow(id) {
+  shadowNum = id;
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
-  let x = getRandomArbitrary(40, 50);
-  let y = 10;
-  let z = getRandomArbitrary(40, 50);
+  let x = getRandomArbitrary(-20, 20);
+  let y = 1;
+  let z = getRandomArbitrary(-30, -20);
   // imporve shadow randomization below
-  const position = `${getRandomArbitrary(-20, 20)} ${1} ${getRandomArbitrary(
-    -30,
-    -20
-  )}`;
+  const position = `${x} ${y} ${z}`;
 
   $("<a-plane/>", {
     id: `shadow${id}`,
-    class: "shadowsss",
+    // class: "shadowsss",
     position: position, // doesn't seem to do anything, known issue
     scale: "10 10 10",
     rotation: "0 0 0",

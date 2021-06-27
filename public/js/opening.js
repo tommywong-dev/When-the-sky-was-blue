@@ -53,7 +53,7 @@ if (!isChrome) {
   $("#playAudio").remove(); // just to make sure that it will not have 2x audio in the background
 }
 
-var socket = io().connect();
+// var socket = io().connect();
 
 var fadeInScreen = document.getElementById("fullscreenFadeIn");
 const sceneButton = document.querySelector("#toScene");
