@@ -5,7 +5,7 @@ let redVal = 76;
 let greenVal = 0;
 let blueVal = 0;
 let scene2El;
-let lobbyEl;
+let lobbyEl = document.querySelector("#lobby");
 let embers;
 //state counter 0 = lobby, francis1 = first scene, francis2 = second, etc.
 var state = 0;
@@ -21,6 +21,8 @@ let cursorReticle;
 let changedFrancis1, changedFrancis2, changedFrancis3;
 let emberBrightness = 0;
 var scene = document.querySelector("a-scene");
+let plane = document.querySelector("#planeToFollow");
+let cam = document.querySelector("#lobbyCam");
 
 AFRAME.registerComponent("foo", {
   //initialize js variables to components in aframe with their classes and ids
@@ -29,8 +31,6 @@ AFRAME.registerComponent("foo", {
     changedFrancis1 = document.querySelector("#francisColorOne");
     embers = document.querySelector("#embers");
     francis1 = document.querySelector("#francis1");
-    this.plane = document.querySelector("#planeToFollow");
-    this.cam = document.querySelector("#lobbyCam");
     floorToFadeScene1 = document.querySelector("#floorToFadeScene1");
     lobbySkyTransition = document.querySelector("#lobbySky");
     lobbySkyTransitionTwo = document.querySelector("#lobbySkyTransitionTwo");
@@ -42,14 +42,12 @@ AFRAME.registerComponent("foo", {
     lobbySkyTransitionTwo.setAttribute("visible", false);
     lobbySkyTransitionThree.setAttribute("visible", false);
 
-    lobbyEl = document.querySelector("#lobby");
     scene2El = document.querySelector("#secondPerformance");
     scene1El = document.querySelector("#firstPerformance");
     scene3El = document.querySelector("#thirdPerformance");
 
     skyElementSecond = document.querySelector("#scene2Sky");
     skyElementFirst = document.querySelector("#scene1Sky");
-    this.plane = document.querySelector("#planeToFollow");
     lobbyEl.pause();
     //set other scenes to be invsible (will be made visible on scene enter)
     scene1El.setAttribute("visible", "false");
@@ -183,7 +181,7 @@ AFRAME.registerComponent("foo", {
             lobbyEl.setAttribute("visible", true);
             state = 0;
             //set camera to the original position
-            this.cam.setAttribute("position", {
+            cam.setAttribute("position", {
               x: 0,
               y: 0,
               z: 0
@@ -206,7 +204,7 @@ AFRAME.registerComponent("foo", {
           lobbyEl.setAttribute("visible", true);
           var myAudio = document.getElementById("addition_2_audio");
           myAudio.play();
-          this.cam.setAttribute("position", {
+          cam.setAttribute("position", {
             x: 0,
             y: 0,
             z: 0
@@ -219,7 +217,6 @@ AFRAME.registerComponent("foo", {
       document.getElementById("player").pause();
       if (time < 5000) {} else {
         planePos -= 0.02;
-        console.log("planePos is: " + planePos);
         if (planePos <= -20) {
           $("#panelToFadeBetweenScenes").fadeIn(1900);
           setTimeout(function () {
@@ -227,7 +224,7 @@ AFRAME.registerComponent("foo", {
             state = 0;
             scene3El.setAttribute("visible", false);
             lobbyEl.setAttribute("visible", true);
-            this.cam.setAttribute("position", {
+            cam.setAttribute("position", {
               x: 0,
               y: 0,
               z: 0
@@ -236,7 +233,7 @@ AFRAME.registerComponent("foo", {
         }
       }
       let camPos = document.querySelector("#lobbyCam").object3D.position;
-      this.plane.setAttribute("position", {
+      plane.setAttribute("position", {
         x: camPos.x,
         y: planePos,
         z: camPos.z
@@ -297,6 +294,14 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 //######################################################################
+
+AFRAME.registerComponent("lobby-cam", {
+  init: function () {
+    document.body.addEventListener('mousemove', (e) => {
+      this.el.object3D.rotation.y = - (e.clientX / 120);
+    })
+  }
+});
 
 //######################################################################
 // Shape rain component below (scene 1 cubes)
