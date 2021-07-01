@@ -298,7 +298,7 @@ function getRandomArbitrary(min, max) {
 AFRAME.registerComponent("lobby-cam", {
   init: function () {
     document.body.addEventListener('mousemove', (e) => {
-      this.el.object3D.rotation.y = - (e.clientX / 120);
+      this.el.object3D.rotation.y = - (e.clientX / 180);
     })
   }
 });
