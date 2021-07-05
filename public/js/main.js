@@ -146,27 +146,56 @@ AFRAME.registerComponent("foo", {
         lobbySkyTransition.setAttribute("visible", "false");
         lobbySkyTransitionTwo.setAttribute("visible", "true");
         lobbySkyTransitionTwo.setAttribute("animation", "autoplay", true);
+        $("#panelToFadeBetweenScenes").fadeIn(1900);
+        setTimeout(function () {
+          $("#panelToFadeBetweenScenes").fadeOut(1900);
+        }, 2000);
         if (
           document.querySelector("#francis2").components.light.light.intensity >
           7.5
         ) {
-          state = 2;
+          state = -1;
+
           lobbyEl.setAttribute("visible", "false");
           scene2El.setAttribute("visible", "true");
-          lobbySkyTransition.setAttribute("visible", "true");
-          lobbySkyTransitionTwo.setAttribute("visible", "false");
+
+          document.getElementById("player").pause();
+          var myAudio = document.getElementById("addition_2_audio");
+          myAudio.play();
+          cam.setAttribute("position", {
+            x: 0,
+            y: 0,
+            z: 0
+          });
 
           skyElementSecond.setAttribute("animation", "autoplay", true);
-          $("#breatheIn").fadeIn(4500);
+
           setTimeout(function () {
-            $("#breatheIn").fadeOut(1900);
+            $("#breatheIn").fadeIn(2000);
+          }, 1000);
+          setTimeout(function () {
+            $("#breatheIn").fadeOut(1000);
           }, 3000);
           setTimeout(function () {
-            $("#breatheOut").fadeIn(4500);
-          }, 6000);
+            $("#breatheOut").fadeIn(6000);
+          }, 4000);
           setTimeout(function () {
-            $("#breatheOut").fadeOut(3000);
-          }, 9000);
+            $("#breatheOut").fadeOut(1000);
+          }, 10000);
+          setTimeout(function () {
+            $("#panelToFadeBetweenScenes").fadeIn(1900);          
+          }, 11000)
+          setTimeout(function () {
+            $("#panelToFadeBetweenScenes").fadeOut(1900);
+            myAudio.pause();
+            lobbyEl.setAttribute("visible", "true");
+            scene2El.setAttribute("visible", "false");
+          }, 12000);
+          setTimeout(function () {
+            state = 0;
+            lobbySkyTransitionTwo.setAttribute("visible", "false");
+            skyElementSecond.setAttribute("animation", "autoplay", false);
+          }, 14000)
         }
       }
       if (
