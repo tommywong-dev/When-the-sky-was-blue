@@ -344,9 +344,9 @@ AFRAME.registerComponent("shaperain", {
           radius: size,
         });
       }
-      x = ((size + spacing) * objects_per_shape * -0.5 + i * (size + spacing)) * Math.random(0.8,1.2);
+      x = ((size + spacing) * objects_per_shape * -0.5 + i * (size + spacing)) * Math.random(0.8, 1.2);
       // x = (size + spacing) * objects_per_shape * -0.5 + i * (size + spacing);
-      y = Math.random() * 5;
+      y = getRandomArbitrary(3, 7);
       z = getRandomArbitrary(-10, 10);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = { x, y, z, z_initial: z };
