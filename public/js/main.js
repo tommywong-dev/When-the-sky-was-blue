@@ -42,8 +42,8 @@ AFRAME.registerComponent("foo", {
     lobbySkyTransitionTwo.setAttribute("visible", false);
     lobbySkyTransitionThree.setAttribute("visible", false);
 
-    scene2El = document.querySelector("#secondPerformance");
     scene1El = document.querySelector("#firstPerformance");
+    scene2El = document.querySelector("#secondPerformance");
     scene3El = document.querySelector("#thirdPerformance");
 
     skyElementSecond = document.querySelector("#scene2Sky");
@@ -68,8 +68,8 @@ AFRAME.registerComponent("foo", {
         document.querySelector("#francis1").components.light.light.intensity >
         0.1
       ) {
-        lobbySkyTransition.setAttribute("visible", "true");
-        lobbySkyTransition.setAttribute("animation", "autoplay", true);
+        // lobbySkyTransition.setAttribute("visible", "true");
+        // lobbySkyTransition.setAttribute("animation", "autoplay", true);
         $("#panelToFadeBetweenScenes").fadeIn(1900);
         setTimeout(function () {
           $("#panelToFadeBetweenScenes").fadeOut(1900);
@@ -89,11 +89,12 @@ AFRAME.registerComponent("foo", {
           scene1El.setAttribute("shaperain", "");
           floorToFadeScene1.setAttribute("animation", "autoplay", true);
           skyElementFirst.setAttribute("animation", "autoplay", true);
-          lobbySkyTransition.setAttribute("material", "color", "rgb(0, 0, 0)");
 
           // trigger audio
           var myAudio = document.getElementById("performance_1_audio");
+          var addAudio = document.getElementById("addition_1_audio");
           myAudio.play();
+          addAudio.play();
           myAudio.volume = 0.6;
 
           document.getElementById("player").pause();
@@ -127,6 +128,7 @@ AFRAME.registerComponent("foo", {
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
+            addAudio.pause();
             lobbyEl.setAttribute("visible", "true");
             scene1El.setAttribute("visible", "false");
           }, 12000);
@@ -143,9 +145,6 @@ AFRAME.registerComponent("foo", {
         document.querySelector("#francis2").components.light.light.intensity >
         0.1
       ) {
-        lobbySkyTransition.setAttribute("visible", "false");
-        lobbySkyTransitionTwo.setAttribute("visible", "true");
-        lobbySkyTransitionTwo.setAttribute("animation", "autoplay", true);
         $("#panelToFadeBetweenScenes").fadeIn(1900);
         setTimeout(function () {
           $("#panelToFadeBetweenScenes").fadeOut(1900);
@@ -160,8 +159,10 @@ AFRAME.registerComponent("foo", {
           scene2El.setAttribute("visible", "true");
 
           document.getElementById("player").pause();
-          var myAudio = document.getElementById("addition_2_audio");
+          var myAudio = document.getElementById("performance_2_audio");
+          var addAudio = document.getElementById("addition_2_audio");
           myAudio.play();
+          addAudio.play();
           cam.setAttribute("position", {
             x: 0,
             y: 0,
@@ -188,90 +189,66 @@ AFRAME.registerComponent("foo", {
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
+            addAudio.pause();
             lobbyEl.setAttribute("visible", "true");
             scene2El.setAttribute("visible", "false");
           }, 12000);
           setTimeout(function () {
             state = 0;
-            lobbySkyTransitionTwo.setAttribute("visible", "false");
             skyElementSecond.setAttribute("animation", "autoplay", false);
           }, 14000)
         }
       }
+
       if (
         document.querySelector("#francis3").components.light.light.intensity >
         0.1
       ) {
-        lobbySkyTransition.setAttribute("visible", "false");
-        lobbySkyTransitionThree.setAttribute("visible", "true");
-        lobbySkyTransitionThree.setAttribute("animation", "autoplay", true);
+        $("#panelToFadeBetweenScenes").fadeIn(1900);
+        setTimeout(function () {
+          $("#panelToFadeBetweenScenes").fadeOut(1900);                
+        }, 2000);
         if (
           document.querySelector("#francis3").components.light.light.intensity >
           7.5
         ) {
-          state = 3;
-          lobbySkyTransition.setAttribute("visible", "true");
-          lobbySkyTransitionThree.setAttribute("visible", "false");
+          state = -1;
+          cam.setAttribute("position", { x: 0, y: 0, z: 0 });
           lobbyEl.setAttribute("visible", "false");
           scene3El.setAttribute("visible", "true");
-        }
-      }
-    }
-    //this code below brings the lobby scene back to being active after some value is reached in each scene.
-    //Scene 1: redvalue of sky becomes high
-    //Scene 2: if red value becomes very low
-    //Scene 3: if plane is far enough below the user.
-    // even though this says state 2, this is still referring to the first francis and its associated scene (cubes and mountains)
 
-
-    // even though this says state 3, this is still referring to the second francis and its associated scene (embers)
-
-    if (state == 2) {
-      document.getElementById("player").pause();
-      if (skyElementFirst.components.material.material.color.g < 0.37) {
-        $("#panelToFadeBetweenScenes").fadeIn(1900);
-        setTimeout(function () {
-          $("#panelToFadeBetweenScenes").fadeOut(1900);
-          state = 0;
-          changedFrancis1.setAttribute("visible", true);
-          scene1El.setAttribute("visible", false);
-          lobbyEl.setAttribute("visible", true);
-          var myAudio = document.getElementById("addition_2_audio");
+          document.getElementById("player").pause();
+          let myAudio = document.getElementById("performance_3_audio");
+          var addAudio = document.getElementById("addition_3_audio");
           myAudio.play();
-          cam.setAttribute("position", {
-            x: 0,
-            y: 0,
-            z: 0
-          });
-        }, 2000);
-      }
-    }
-    // even though this says state 4, this is still referring to the third francis and its associated scene (stars and falling plane)
-    if (state == 3) {
-      document.getElementById("player").pause();
-      if (time < 5000) {} else {
-        planePos -= 0.02;
-        if (planePos <= -20) {
-          $("#panelToFadeBetweenScenes").fadeIn(1900);
+          addAudio.play();
+          setTimeout(function () {
+            $("#breatheIn").fadeIn(2000);
+          }, 1000);
+          setTimeout(function () {
+            $("#breatheIn").fadeOut(1000);
+          }, 3000);
+          setTimeout(function () {
+            $("#breatheOut").fadeIn(6000);
+          }, 4000);
+          setTimeout(function () {
+            $("#breatheOut").fadeOut(1000);
+          }, 10000);
+          setTimeout(function () {
+            $("#panelToFadeBetweenScenes").fadeIn(1900);          
+          }, 11000)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
+            myAudio.pause();
+            addAudio.pause();
             state = 0;
-            scene3El.setAttribute("visible", false);
-            lobbyEl.setAttribute("visible", true);
-            cam.setAttribute("position", {
-              x: 0,
-              y: 0,
-              z: 0
-            });
-          }, 2000);
+            lobbyEl.setAttribute("visible", "true");
+            scene3El.setAttribute("visible", "false");
+          }, 12000);
+          setTimeout(function () {
+          }, 14000)
         }
       }
-      let camPos = document.querySelector("#lobbyCam").object3D.position;
-      plane.setAttribute("position", {
-        x: camPos.x,
-        y: planePos,
-        z: camPos.z
-      });
     }
   }
 });
