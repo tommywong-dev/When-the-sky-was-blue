@@ -120,6 +120,9 @@
           id="francis-color-mtl"
           src="static/colours/cloak_red.mtl"
         ></a-asset-item>
+        <a-asset-item id="cage-obj" src="static/cage.obj"></a-asset-item>
+        <a-asset-item id="cage-mtl" src="static/cage.mtl"></a-asset-item>
+
         <img id="skymap" src="textures/sky2.png" crossorigin="anonymous" />
         <img id="flare" src="textures/flare.jpg" />
         <img
@@ -366,15 +369,26 @@
       <a-entity id="thirdPerformance" visible="false">
         <a-sky
           src="#skyOne"
-          geometry="radius: 100; thetaLength: 100"
-          rotation="-90 0 0"
-        ></a-sky>
-
-        <a-sky
-          src="#skyOne"
           geometry="radius: 100; thetaLength: 100; primitive: box; width: 100; height: 100; depth: 100;"
           rotation="90 0 0"
         ></a-sky>
+        <a-light type="point" position="0 5 0"></a-light>
+
+        <a-entity
+          cage
+          id="cage"
+          obj-model="obj: #cage-obj; mtl: #cage-mtl"
+          position="0 8 0"
+          scale="1.0 1.0 1.0"
+          animation__rotation="property: rotation; dur: 20000; from: 0 0 0; to: 90 180 90; easing: linear; autoplay: true;"
+          animation__position="property: position; dur: 20000; from: 0 8 0; to: 10 5 8; easing: linear; autoplay: true;"
+        ></a-entity>
+
+        <a-entity cage2 id="cage2" obj-model="obj: #cage-obj; mtl: #cage-mtl" position="-10 0 8" scale="1.0 1.0 1.0"
+          animation__rotation="property: rotation; dur: 20000; from: 0 0 0; to: 90 -180 90; easing: linear; autoplay: true;"
+          animation__position="property: position; dur: 20000; from: -10 0 8; to: -20 5 10; easing: linear; autoplay: true;">
+        </a-entity>
+
         <a-entity
           id="planeToFollow"
           geometry="primitive: plane; width: 2; height: 2; segmentsHeight: 20; segmentsWidth: 20;"

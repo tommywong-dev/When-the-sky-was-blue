@@ -46,8 +46,8 @@ AFRAME.registerComponent("foo", {
     scene2El = document.querySelector("#secondPerformance");
     scene3El = document.querySelector("#thirdPerformance");
 
-    skyElementSecond = document.querySelector("#scene2Sky");
     skyElementFirst = document.querySelector("#scene1Sky");
+    skyElementSecond = document.querySelector("#scene2Sky");
     lobbyEl.pause();
     //set other scenes to be invsible (will be made visible on scene enter)
     scene1El.setAttribute("visible", "false");
@@ -81,7 +81,6 @@ AFRAME.registerComponent("foo", {
         ) {
           state = -1;
           cam.setAttribute("position", { x: 0, y: 0, z: 0 });
-          console.log('%c first performance', 'background-color: green')
           lobbyEl.setAttribute("visible", "false");
           scene1El.setAttribute("visible", "true");
 
@@ -263,7 +262,6 @@ var shadowNum = 0;
 
 socket.emit("userConnected");
 socket.on("userCount", data => {
-  console.log('client count:', data);
   if (!shadowNum) {
     for (let i = 0; i < data; i++) appendShadow(i);
   } else {
@@ -309,7 +307,7 @@ function getRandomArbitrary(min, max) {
 AFRAME.registerComponent("lobby-cam", {
   init: function () {
     document.body.addEventListener('mousemove', (e) => {
-      this.el.object3D.rotation.y = - (e.clientX / 180);
+      this.el.object3D.rotation.y = - (e.clientX / 180) + 180;
     })
   }
 });

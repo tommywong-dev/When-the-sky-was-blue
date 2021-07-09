@@ -63,7 +63,8 @@ sceneButton.addEventListener("click", () => {
   var myAudio = document.getElementById("base_layer_always_on");
   myAudio.play();
   myAudio.volume = 1;
-  playIntro();
+  // playIntro();
+  timeout();
 });
 
 function timeout() {
