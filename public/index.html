@@ -378,24 +378,18 @@
           cage
           id="cage"
           obj-model="obj: #cage-obj; mtl: #cage-mtl"
-          position="0 8 0"
+          position="0 4 -20"
           scale="1.0 1.0 1.0"
-          animation__rotation="property: rotation; dur: 20000; from: 0 0 0; to: 90 180 90; easing: linear; autoplay: true;"
-          animation__position="property: position; dur: 20000; from: 0 8 0; to: 10 5 8; easing: linear; autoplay: true;"
+          animation__rotation="property: rotation; dur: 50000; from: 0 0 0; to: 0 360 360; easing: linear; autoplay: true; loop: true"
         ></a-entity>
 
-        <a-entity cage2 id="cage2" obj-model="obj: #cage-obj; mtl: #cage-mtl" position="-10 0 8" scale="1.0 1.0 1.0"
-          animation__rotation="property: rotation; dur: 20000; from: 0 0 0; to: 90 -180 90; easing: linear; autoplay: true;"
-          animation__position="property: position; dur: 20000; from: -10 0 8; to: -20 5 10; easing: linear; autoplay: true;">
-        </a-entity>
-
-        <a-entity
+        <!-- <a-entity
           id="planeToFollow"
           geometry="primitive: plane; width: 2; height: 2; segmentsHeight: 20; segmentsWidth: 20;"
           rotation="-90 0 0"
           position="0 0 0"
           material="color: #ffffff"
-        ></a-entity>
+        ></a-entity> -->
       </a-entity>
     </a-scene>
 

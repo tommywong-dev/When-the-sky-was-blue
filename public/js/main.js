@@ -123,19 +123,19 @@ AFRAME.registerComponent("foo", {
           }, 10000);
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeIn(1900);          
-          }, 11000)
+          }, 21000)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
             addAudio.pause();
             lobbyEl.setAttribute("visible", "true");
             scene1El.setAttribute("visible", "false");
-          }, 12000);
+          }, 23000);
           setTimeout(function () {
             state = 0;
             floorToFadeScene1.setAttribute("animation", "autoplay", false);
             skyElementFirst.setAttribute("animation", "autoplay", false);
-          }, 14000)
+          }, 25000)
           //moving boxes can be triggered here
         }
       }
@@ -184,18 +184,18 @@ AFRAME.registerComponent("foo", {
           }, 10000);
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeIn(1900);          
-          }, 11000)
+          }, 21000)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
             addAudio.pause();
             lobbyEl.setAttribute("visible", "true");
             scene2El.setAttribute("visible", "false");
-          }, 12000);
+          }, 23000);
           setTimeout(function () {
             state = 0;
             skyElementSecond.setAttribute("animation", "autoplay", false);
-          }, 14000)
+          }, 25000)
         }
       }
 
@@ -213,6 +213,11 @@ AFRAME.registerComponent("foo", {
         ) {
           state = -1;
           cam.setAttribute("position", { x: 0, y: 0, z: 0 });
+          let camZ = 0;
+          let moveForward = setInterval(function () {
+            cam.setAttribute("position", { z: camZ });
+            camZ -= 0.01;
+          }, 25)
           lobbyEl.setAttribute("visible", "false");
           scene3El.setAttribute("visible", "true");
 
@@ -235,17 +240,17 @@ AFRAME.registerComponent("foo", {
           }, 10000);
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeIn(1900);          
-          }, 11000)
+          }, 21000)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
             addAudio.pause();
             state = 0;
+            cam.setAttribute("position", { x: 0, y: 0, z: 0 });
+            clearInterval(moveForward)
             lobbyEl.setAttribute("visible", "true");
             scene3El.setAttribute("visible", "false");
-          }, 12000);
-          setTimeout(function () {
-          }, 14000)
+          }, 23000);
         }
       }
     }
