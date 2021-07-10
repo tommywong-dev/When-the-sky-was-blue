@@ -108,34 +108,23 @@ AFRAME.registerComponent("foo", {
             }
           }
 
-          //first text container
-          setTimeout(function () {
-            $("#breatheIn").fadeIn(2000);
-          }, 1000);
-          setTimeout(function () {
-            $("#breatheIn").fadeOut(1000);
-          }, 3000);
-          setTimeout(function () {
-            $("#breatheOut").fadeIn(6000);
-          }, 4000);
-          setTimeout(function () {
-            $("#breatheOut").fadeOut(1000);
-          }, 10000);
+          const performanceDuration = 364 * 1000; // 364 seconds
+          breathInAndOut();
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeIn(1900);          
-          }, 21000)
+          }, performanceDuration)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
             addAudio.pause();
             lobbyEl.setAttribute("visible", "true");
             scene1El.setAttribute("visible", "false");
-          }, 23000);
+          }, performanceDuration + 2000);
           setTimeout(function () {
             state = 0;
             floorToFadeScene1.setAttribute("animation", "autoplay", false);
             skyElementFirst.setAttribute("animation", "autoplay", false);
-          }, 25000)
+          }, performanceDuration + 4000)
           //moving boxes can be triggered here
         }
       }
@@ -170,32 +159,22 @@ AFRAME.registerComponent("foo", {
 
           skyElementSecond.setAttribute("animation", "autoplay", true);
 
-          setTimeout(function () {
-            $("#breatheIn").fadeIn(2000);
-          }, 1000);
-          setTimeout(function () {
-            $("#breatheIn").fadeOut(1000);
-          }, 3000);
-          setTimeout(function () {
-            $("#breatheOut").fadeIn(6000);
-          }, 4000);
-          setTimeout(function () {
-            $("#breatheOut").fadeOut(1000);
-          }, 10000);
+          const performanceDuration = 278 * 1000; // 278 seconds
+          breathInAndOut();
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeIn(1900);          
-          }, 21000)
+          }, performanceDuration)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
             addAudio.pause();
             lobbyEl.setAttribute("visible", "true");
             scene2El.setAttribute("visible", "false");
-          }, 23000);
+          }, performanceDuration + 2000);
           setTimeout(function () {
             state = 0;
             skyElementSecond.setAttribute("animation", "autoplay", false);
-          }, 25000)
+          }, performanceDuration + 4000)
         }
       }
 
@@ -216,7 +195,7 @@ AFRAME.registerComponent("foo", {
           let camZ = 0;
           let moveForward = setInterval(function () {
             cam.setAttribute("position", { z: camZ });
-            camZ -= 0.01;
+            camZ -= 0.002;
           }, 25)
           lobbyEl.setAttribute("visible", "false");
           scene3El.setAttribute("visible", "true");
@@ -226,21 +205,12 @@ AFRAME.registerComponent("foo", {
           var addAudio = document.getElementById("addition_3_audio");
           myAudio.play();
           addAudio.play();
-          setTimeout(function () {
-            $("#breatheIn").fadeIn(2000);
-          }, 1000);
-          setTimeout(function () {
-            $("#breatheIn").fadeOut(1000);
-          }, 3000);
-          setTimeout(function () {
-            $("#breatheOut").fadeIn(6000);
-          }, 4000);
-          setTimeout(function () {
-            $("#breatheOut").fadeOut(1000);
-          }, 10000);
+
+          const performanceDuration = 314 * 1000; // 314 seconds
+          breathInAndOut();
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeIn(1900);          
-          }, 21000)
+          }, performanceDuration)
           setTimeout(function () {
             $("#panelToFadeBetweenScenes").fadeOut(1900);
             myAudio.pause();
@@ -250,7 +220,7 @@ AFRAME.registerComponent("foo", {
             clearInterval(moveForward)
             lobbyEl.setAttribute("visible", "true");
             scene3El.setAttribute("visible", "false");
-          }, 23000);
+          }, performanceDuration + 2000);
         }
       }
     }
@@ -317,6 +287,21 @@ AFRAME.registerComponent("lobby-cam", {
   }
 });
 
+const breathInAndOut = () => {
+  setTimeout(function () {
+    $("#breatheIn").fadeIn(2000);
+  }, 1000);
+  setTimeout(function () {
+    $("#breatheIn").fadeOut(1000);
+  }, 3000);
+  setTimeout(function () {
+    $("#breatheOut").fadeIn(6000);
+  }, 4000);
+  setTimeout(function () {
+    $("#breatheOut").fadeOut(1000);
+  }, 10000);
+}
+
 //######################################################################
 // Shape rain component below (scene 1 cubes)
 var roundtripcounter = 0;
@@ -353,8 +338,8 @@ AFRAME.registerComponent("shaperain", {
           radius: size,
         });
       }
-      x = ((size + spacing) * objects_per_shape * -0.5 + i * (size + spacing)) * Math.random(0.8, 1.2);
-      // x = (size + spacing) * objects_per_shape * -0.5 + i * (size + spacing);
+      // x = ((size + spacing) * objects_per_shape * -0.5 + i * (size + spacing)) * Math.random(-1.2, 1.2);
+      x = getRandomArbitrary(-30, 30);
       y = getRandomArbitrary(3, 7);
       z = getRandomArbitrary(-10, 10);
       const position = `${x} ${y} ${z}`;

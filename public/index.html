@@ -265,18 +265,18 @@
           francis2mouseenter
           id="francis2"
           class="francis"
-          obj-model="obj: #francis-2-obj; mtl: #francis-2-mtl"
+          obj-model="obj: #francis-1-obj; mtl: #francis-1-mtl"
           position="0 -0.238 -6.897"
           scale="0.03 0.03 0.03"
           light="type: hemisphere; color: white; intensity: 0;"
           animation__rotation="property: light.intensity; from:0; to: 8; loop: 1; dur: 2000; delay:100; dir: alternate; startEvents: click;"
         >
-          <a-animation
+          <!-- <a-animation
             begin="click" attribute="position" from="0 -0.238 -6.897"
             to="0 5 -6.897" dur="2000" fill="both"
           ></a-animation>
           <a-animation begin="click" attribute="position" from="0 -0.238 -6.897" to="0 -0.238 -6.897" dur="2000" fill="both">
-          </a-animation>
+          </a-animation> -->
         </a-entity>
         <a-light type="point" intensity="1" id="francis2LightTwo" color="white" distance="3.6" position="0 1 -6" 
           animation="property: intensity; dur: 4000; from: 0.6; to: 8; loop: false; reapeat: 3; dir: alternate; autoplay: false"
@@ -378,7 +378,7 @@
           cage
           id="cage"
           obj-model="obj: #cage-obj; mtl: #cage-mtl"
-          position="0 4 -20"
+          position="0 4 -32"
           scale="1.0 1.0 1.0"
           animation__rotation="property: rotation; dur: 50000; from: 0 0 0; to: 0 360 360; easing: linear; autoplay: true; loop: true"
         ></a-entity>
