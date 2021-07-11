@@ -254,19 +254,27 @@ var shadowNum = 0;
 
 socket.emit("userConnected");
 socket.on("userCount", data => {
+  console.log('user count:', data)
+  // initial
   if (!shadowNum) {
     for (let i = 0; i < data; i++) appendShadow(i);
-  } else {
-    appendShadow(data);
+  // if any users left
+  } else if (data < shadowNum) {
+    removeShadow(data);
+  // if any user join
+  } else if (data > shadowNum) {
+    appendShadow(data - 1);
   }
+
+  shadowNum = data
 })
 
 function appendShadow(id) {
-  shadowNum = id;
+  // shadowNum = id;
   // https://stackoverflow.com/questions/41336889/adding-new-entities-on-the-fly-in-aframe
-  let x = getRandomArbitrary(-20, 20);
+  let x = getRandomArbitrary(-30, 30);
   let y = 1;
-  let z = getRandomArbitrary(-30, -20);
+  let z = getRandomArbitrary(-35, -15);
   // imporve shadow randomization below
   const position = `${x} ${y} ${z}`;
 
@@ -282,13 +290,8 @@ function appendShadow(id) {
   document.getElementById(`shadow${id}`).setAttribute("position", position); // this does set position as a workaround
 }
 
-function removeObject(objectCount) {
-  let id = objectCount - 1;
-  if (id < 0) {
-    id = 0;
-  }
-  previousObject = document.getElementById(`shadow${id}`);
-  previousObject.parentNode.removeChild(previousObject);
+function removeShadow(id) {
+  document.getElementById(`shadow${id}`).remove();
 }
 
 function getRandomArbitrary(min, max) {
