@@ -227,6 +227,23 @@ AFRAME.registerComponent("foo", {
   }
 });
 
+for (let i = 1; i <= 3; i++) {
+  AFRAME.registerComponent(`francis${i}`, {
+    init: function () {
+      const el = this.el;
+      el.addEventListener('click', function (e) {
+        el.setAttribute('animation', 'property: light.intensity; from:0; to: 8; loop: 1; dur: 2000;')
+      })
+      el.addEventListener('mouseenter', function (e) {
+        el.setAttribute('scale', '0.031 0.031 0.031');
+      })
+      el.addEventListener('mouseleave', function (e) {
+        el.setAttribute('scale', '0.03 0.03 0.03');
+      })
+    }
+  })
+}
+
 //######################################################################
 // Shadow code below, server-side
 

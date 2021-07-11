@@ -33,6 +33,10 @@ h2 {
   text-align: center;
 }
 
+.a-canvas.a-grab-cursor:hover {
+  cursor: none !important;
+}
+
 .nodisplay {
   display: none;
 }

@@ -80,6 +80,8 @@ function timeout() {
   scene.play();
   setTimeout(function () {
     document.querySelector("#openingTitle").remove();
+    let cam = document.querySelector("#lobbyCam");
+    cam.setAttribute("position", { x: 0, y: 0, z: 0 });
   }, 400);
 }
 
