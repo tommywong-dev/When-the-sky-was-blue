@@ -335,7 +335,7 @@ AFRAME.registerComponent("shaperain", {
       x;
     let sceneEl = document.querySelector("#firstPerformance");
 
-    const number_of_objects = 40
+    const number_of_objects = 200
     const shape_options = ['box', 'sphere', 'dodecahedron', 'tetrahedron'];
     for (let i = 0; i < number_of_objects; i++) {
       const shape = shape_options[Math.floor(Math.random() * 4)]
@@ -356,9 +356,9 @@ AFRAME.registerComponent("shaperain", {
         });
       }
       // x = ((size + spacing) * objects_per_shape * -0.5 + i * (size + spacing)) * Math.random(-1.2, 1.2);
-      x = getRandomArbitrary(-30, 30);
-      y = getRandomArbitrary(3, 7);
-      z = getRandomArbitrary(-10, 10);
+      x = getRandomArbitrary(-50, 40);
+      y = getRandomArbitrary(3, 10);
+      z = getRandomArbitrary(-40, 50);
       const position = `${x} ${y} ${z}`;
       const position_dictionary = { x, y, z, z_initial: z };
       // console.log("intended pos of shape", position);
@@ -394,10 +394,10 @@ AFRAME.registerComponent("shaperain", {
       yPos = shapepositions[shape_id]["y"];
       zPos = shapepositions[shape_id]["z"] += 0.01;
 
-      if (zPos > 9) {
+      if (zPos > 50) {
         shapepositions[shape_id]["z"] = shapepositions[shape_id]["z_initial"];
         shape.setAttribute("color", getRandomColor());
-        zPos = shapepositions[shape_id]["z"] = -10;
+        zPos = shapepositions[shape_id]["z"] = -40;
       }
 
       shape.setAttribute(

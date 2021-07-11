@@ -55,7 +55,7 @@
           <h1 class="nodisplay" id="text1">When once the sky was blue</h1>
           <h2 class="nodisplay" id="text2">a virtual experience</h2>
           <div class="centerButton nodisplay" id="startButtonContainer">
-            <a href="/#" id="toScene" class="" onclick="fadein()">Enter the World</a>
+            <a href="/#" id="toScene">Enter the World</a>
           </div>
           
         </div>
@@ -106,12 +106,12 @@
     >
       <a-assets>
         <img id="shadow" crossorigin="anonymous" src="static/shadow.png" />
-        <a-asset-item id="francis-1-obj" src="static/francis1.obj"></a-asset-item>
-        <a-asset-item id="francis-1-mtl" src="static/francis1.mtl"></a-asset-item>
-        <a-asset-item id="francis-2-obj" src="static/francis2.obj"></a-asset-item>
-        <a-asset-item id="francis-2-mtl" src="static/francis2.mtl"></a-asset-item>
-        <a-asset-item id="francis-3-obj" src="static/francis1.obj"></a-asset-item>
-        <a-asset-item id="francis-3-mtl" src="static/francis1.mtl"></a-asset-item>
+        <a-asset-item id="francis-1-obj" src="static/cloak.obj"></a-asset-item>
+        <a-asset-item id="francis-1-mtl" src="static/cloak.mtl"></a-asset-item>
+        <a-asset-item id="francis-2-obj" src="static/cloak.obj"></a-asset-item>
+        <a-asset-item id="francis-2-mtl" src="static/cloak.mtl"></a-asset-item>
+        <a-asset-item id="francis-3-obj" src="static/cloak.obj"></a-asset-item>
+        <a-asset-item id="francis-3-mtl" src="static/cloak.mtl"></a-asset-item>
         <a-asset-item
           id="francis-color-obj"
           src="static/colours/cloak_red.obj"
@@ -155,7 +155,7 @@
       <!-- LOBBY -->
       <a-entity id="lobby">
         <a-plane
-          position="0 0 -4"
+          position="0 -1 -4"
           rotation="-90 0 0"
           width="10000"
           height="10000"
@@ -197,7 +197,7 @@
             <a-entity 
               position="0 0 -1.3" 
               geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.035;"
-              material="color: white; shader: flat; opacity: 1" 
+              material="color: #333; shader: flat; opacity: 1" 
               cursor="maxDistance: 3;"
             ></a-entity>
           </a-entity>
